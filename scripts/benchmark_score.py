@@ -184,11 +184,25 @@ def extract_data(data):
     
     return train, eval
 
-
-def compute_score(data):
+"""TODO
+1. compute the leaf weights from the tree
+2. sum the products of means and weights
+    - the log instead?
+3. include a normalization constant per leaf so they are makign equal contributions
+4. normalize the output with a constant to get to a nice number like 100
+5. factor out the 'data' parts (tree structure, leaf weights) into a versioned data file
+6. make some kind of utility for reversioning the score config based on a new set of baselines
+"""
+def compute_score(data, root):
     train, eval = extract_data(data)
 
-    model_weights = compute_model_weights()
+    visit = [root]
+    while visit:
+        curr = visit.pop()
+        for child in curr.children: 
+            g.edge(curr.name, child.name, label=f'{child.weight:.2f}')
+            visit.append(child)
+
 
 
 if __name__ == "__main__":
