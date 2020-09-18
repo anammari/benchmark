@@ -79,6 +79,7 @@ class ScoreNode(object):
         self.specified_weight = weight is not None
         self.__specified_children = []
         self.__unspecified_children = []
+        self.__abosolute = None
 
     def add_child(self, child):
         """Add a new child weight.
@@ -116,6 +117,11 @@ class ScoreNode(object):
         assert not self.specified_weight
         self.__weight = weight
 
+    def propagate(self, weight):
+        self.__absolute = weight * self.weight
+        for c in self.children:
+            c.propagate(self.__absolute)
+        
         
 def draw_graph(filename, root):
     g = Digraph('TorchBench Score Weights', filename=filename)
