@@ -1,2 +1,9 @@
 pytest
 pytest-benchmark
+tensorboardX
+pandas
+scikit-image
+opencv-python
+dill
+FastNLP
+yacs
