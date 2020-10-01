@@ -1,6 +1,7 @@
 pytest
 pytest-benchmark
 tensorboardX
+tensorboard
 pandas
 scikit-image
 opencv-python
